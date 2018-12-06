@@ -99,6 +99,25 @@ body {
        height:75px;
        width: 75px;
        position: relative;
-       margin: 5%;
-   }
+       width: 100px;
+    height: 100px;
+    background: red;
+    position: relative;
+    -webkit-animation: mymove 6s infinite; 
+    -webkit-animation-timing-function: linear; 
+    animation: mymove 6s infinite;
+    animation-timing-function: linear;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes mymove {
+    from {left: 0px;}
+    to {left: 800px;}
+}
+
+@keyframes mymove {
+    from {left: 0px;}
+    to {left: 800px;}
+}
+   
    
