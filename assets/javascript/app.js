@@ -3,13 +3,15 @@ let map;
 
 
 function submit() {
-    $(".FrontButton").on("click", function () {
+    $("#form").submit(function (event) {
+        event.preventDefault();
         console.log("submit works");
         // event.preventDefault();
-        // const location = $(event.currentTarget).find('.locationForm').val();
+
+
         const googleApiKey = 'AIzaSyDzgrHg1NotksoCzY-i-E98LuqKE-SH4Fg';
-        let someOriginInput = 'Toronto';
-        let someDestinationInput = 'Montreal';
+        let someOriginInput = $("#start").val().trim();
+        let someDestinationInput = $("#destination").val().trim();
 
         let queryURL = `https://maps.googleapis.com/maps/api/directions/json?origin=${someOriginInput}&destination=${someDestinationInput}&avoid=highways&mode=bicycling&key=${googleApiKey}`;
 
@@ -42,6 +44,7 @@ function initMap() {
 
 function showMap() {
     $(".map").css('display', 'block');
+    $(".frontText").css('hide');
 }
 
 
