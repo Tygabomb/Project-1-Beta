@@ -9,7 +9,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
   }
   
-  .TucsonImage {
+  .tucsonImage {
     background-image: url("https://images.onepixel.com/4b52f26d-38cf-70fc-3540-31c172b49ef4_1000.jpg?auto=format&q=55&mark=watermark%2Fcenter-v5.png&markalign=center%2Cmiddle&h=364&markalpha=20&s=ce0f5096b407ea1190700b78cf25bfc0");
     background-color: #cccccc;
     height: 700px;
@@ -17,6 +17,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+  }
+  .tucsonImage.hide-bg{
+    background-image:none;
   }
   
   #frontText {
@@ -98,15 +101,6 @@ body {
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
   }
-
-  #map {
-    height: 100%;
-    width: 100%;
-    display: none;
-    margin-top: 5em;
-  }
- 
-  
 .logo {
     display: inline-block;
     width: 200px;
@@ -135,3 +129,61 @@ body {
 .weather li {
     float: right;
 }
+#map {
+      height: 100%;
+      margin-right: 400px;
+    
+      display: none;
+}
+/* #right-panel {
+  font-family: 'Roboto', 'sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  float: none;
+  width: auto;
+  display:none;
+  
+} */
+
+#right-panel select,
+#right-panel input {
+  font-size: 15px;
+}
+#right-panel select {
+  width: 100%;
+}
+
+#right-panel i {
+  font-size: 12px;
+}
+
+#right-panel {
+  height: 100%;
+  float: right;
+  width: 390px;
+  overflow: auto;
+}
+
+.warnbox-content {
+  display: none 
+}
+.warnbox-c1, .warnbox-c2{
+display: none 
+}
+
+#form-panel {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto', 'sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  display:none;
+  
+}
+
