@@ -87,6 +87,7 @@ color: white;
 
 .links li{
     display: inline-block;
+}
   .tucsonImage {
     background-image: url("https://images.onepixel.com/4b52f26d-38cf-70fc-3540-31c172b49ef4_1000.jpg?auto=format&q=55&mark=watermark%2Fcenter-v5.png&markalign=center%2Cmiddle&h=364&markalpha=20&s=ce0f5096b407ea1190700b78cf25bfc0");
     background-color: #cccccc;
@@ -199,3 +200,104 @@ color: white;
     text-decoration: none;
 }
 
+.links li{
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.weather li {
+    float: right;
+}
+#map {
+      height: 100%;
+      margin-right: 400px;
+      margin-top: 5em;
+      display: none;
+}
+/* #right-panel {
+  font-family: 'Roboto', 'sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  float: none;
+  width: auto;
+  display:none;
+  
+} */
+
+#right-panel select,
+#right-panel input {
+  font-size: 15px;
+}
+#right-panel select {
+  width: 100%;
+}
+
+#right-panel i {
+  font-size: 12px;
+}
+
+#right-panel {
+  height: 100%;
+  float: right;
+  width: 24.375em;
+  overflow: auto;
+}
+
+.warnbox-content {
+  display: none 
+}
+.warnbox-c1, .warnbox-c2{
+display: none 
+}
+
+#form-panel {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto', 'sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  display:none;
+  
+}
+#weatherInfo{
+  width: 5em;
+  height:350px;
+}
+
+   .LogoGif{
+       height:75px;
+       width: 75px;
+       position: relative;
+       width: 100px;
+    height: 100px;
+    background: red;
+    position: relative;
+    -webkit-animation: mymove 6s infinite; 
+    -webkit-animation-timing-function: linear; 
+    animation: mymove 6s infinite;
+    animation-timing-function: linear;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes mymove {
+    from {left: 0px;}
+    to {left: 770px;}
+}
+
+@keyframes mymove {
+    from {left: 0px;}
+    to {left: 770px;}
+}
+.dropDownMenuButton{
+background-color: aquamarine
+}
+
+.buttonContainer {
+  display: none;
+}
