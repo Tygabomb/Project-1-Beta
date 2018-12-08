@@ -1,4 +1,4 @@
-
+//https://cors-anywhere.herokuapp.com
 let map;
 function submit() {
     $("#form, #form-panel").submit(function (event) {
@@ -75,8 +75,8 @@ function calcRoute(start, end, directionsService, directionsDisplay) {
 }
 function showMap() {
     $(".result").show();
-    $("#new-route-button").show();
 
+    $(".buttonContainer").show();
     $("#right-panel").css('display');
     $(".map").css('display', 'block');
     $(".tucsonImage").addClass('hide-bg');
@@ -112,7 +112,7 @@ function weatherData() {
             let icon = data.weather[0].icon;
             console.log(data.wind.speed);
             let wind = data.wind.speed;
-            // $('#weatherInfo').append(temp, descript, icon, wind);
+
         },
         // if use submits a city thats not in the api it runs an error function
         error: function (xhr, ajaxOptions, thrownError) {
