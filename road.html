@@ -55,6 +55,7 @@
                 zoom: 14,
                 center: { lat: 37.77, lng: -122.447 }
             });
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
             directionsDisplay.setMap(map);
 
             calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -82,6 +83,10 @@
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzgrHg1NotksoCzY-i-E98LuqKE-SH4Fg&callback=initMap">
+
+
+
+
 
 
 
