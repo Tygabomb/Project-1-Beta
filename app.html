@@ -16,10 +16,13 @@
 
 <body>
 
-    <nav>
-        <a class="logo" href="index.html">
-            TBY
-        </a>
+    <nav class="row">
+        <div class="col-md-4">
+            <a class="logo" href="index.html">
+                TBY
+            </a>
+        </div>
+        
         <div class="links">
             <ul class="links li">
                 <li><a href="">Location, Zip Code</a></li>
@@ -35,27 +38,30 @@
                     Card for the weather radar map
                 </div>
             </div>
-
-            <form>
-                <div class="form-group">
-                    <label>Starting Location</label>
-                    <input type="adress" class="form-control" id="startLocationInput" placeholder="Enter Start Location Here">
-                </div>
-                <div class="form-group">
-                    <label>Destination</label>
-                    <input type="address" class="form-control" id="destinationInput" placeholder="Enter Destination Here">
-                </div>
-                <button type="submit" class="btn btn-primary">Ride!</button>
-            </form>
-
             <div class="col-md-4">
-                <div class="card text-white bg-primary mb-3" id="map">
-                    Card for the route map
+                <div class="row card">
+                    <form>
+                        <div class="form-group">
+                            <label>Starting Location</label>
+                            <input type="adress" class="form-control" id="startLocationInput" placeholder="Enter Start Location Here">
+                        </div>
+                        <div class="form-group">
+                            <label>Destination</label>
+                            <input type="address" class="form-control" id="destinationInput" placeholder="Enter Destination Here">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ride!</button>
+                    </form>
+                </div>
+
+                <div class="row card">
+                    <div class="card text-white bg-primary mb-3" id="map">
+                        Card for the route map
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-4">
-                <button class="FrontButton hvr-icon-push" href="#">
+                <button class="hvr-icon-push" href="#">
                     Save to Favorites
                     <i class="far fa-star"></i>
                 </button>
