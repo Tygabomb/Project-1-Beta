@@ -211,7 +211,7 @@ color: white;
 #map {
       height: 100%;
       margin-right: 400px;
-      margin-top: 5em;
+    
       display: none;
 }
 /* #right-panel {
@@ -239,7 +239,7 @@ color: white;
 #right-panel {
   height: 100%;
   float: right;
-  width: 24.375em;
+  width: 390px;
   overflow: auto;
 }
 
@@ -265,23 +265,19 @@ display: none
   display:none;
   
 }
-#weatherInfo{
-  width: 5em;
-  height:350px;
-}
 
 .LogoGif{
- height:75px;
+height:75px;
 width: 75px;
 position: relative;
 width: 100px;
 height: 100px;
 background: red;
 position: relative;
-    -webkit-animation: mymove 6s infinite; 
-    -webkit-animation-timing-function: linear; 
-    animation: mymove 6s infinite;
-    animation-timing-function: linear;
+-webkit-animation: mymove 6s infinite; 
+-webkit-animation-timing-function: linear; 
+animation: mymove 6s infinite;
+animation-timing-function: linear;
 }
 
 /* Safari 4.0 - 8.0 */
