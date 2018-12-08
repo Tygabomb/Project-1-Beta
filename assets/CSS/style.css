@@ -112,12 +112,14 @@ body {
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes mymove {
     from {left: 0px;}
-    to {left: 800px;}
+    to {left: 770px;}
 }
 
 @keyframes mymove {
     from {left: 0px;}
-    to {left: 800px;}
+    to {left: 770px;}
 }
-   
-   
+.dropDownMenuButton{
+background-color: aquamarine
+}
+
