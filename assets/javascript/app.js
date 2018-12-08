@@ -31,6 +31,7 @@ function submit() {
 
 submit();
 
+
 function initMap() {
     console.log("in init map");
     map = new google.maps.Map(document.getElementById('map'), {
@@ -43,8 +44,6 @@ function initMap() {
 function showMap() {
     $(".map").css('display', 'block');
 }
-
-
 
 
 
