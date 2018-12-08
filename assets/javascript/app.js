@@ -28,6 +28,7 @@ function submit() {
                 console.log(endCoord);
                 initMap(startCoord, endCoord);
                 showMap();
+                weatherData();
 
 
             }
@@ -88,6 +89,55 @@ $('#new-route-button').on('click', function () {
 
 })
 
+function weatherData() {
+    let URL = "https://api.openweathermap.org/data/2.5/weather";
+    let key = "58c218efb9618338868686af4eb8ad1e";
+    let units = "units=imperial";
+    $.ajax({
+        // ajax call takes url, type of connection, type of data we want to recieve from the api, then a callback function
+        url: `https://api.openweathermap.org/data/2.5/weather?q=Tucson&${units}&APPID=${key}`,
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            // invoking (calling the function) the results from the api 
+            // weatherResults(data);
+
+            weatherResult(data);
+            console.log(data);
+            console.log(data.main.temp);
+            let temp = data.main.temp;
+            console.log(data.weather[0].description);
+            let descript = data.weather[0].description;
+            console.log(data.weather[0].icon);
+            let icon = data.weather[0].icon;
+            console.log(data.wind.speed);
+            let wind = data.wind.speed;
+            // $('#weatherInfo').append(temp, descript, icon, wind);
+        },
+        // if use submits a city thats not in the api it runs an error function
+        error: function (xhr, ajaxOptions, thrownError) {
+
+            if (xhr.status == 404) {
+                errorResults(thrownError);
+            }
+        }
+    });
+}
+
+function weatherResult(data) {
+    let results = `   
+    <div class="results">
+        <h3>Weather Now for ${data.name},${data.sys.country}</h3>
+        <p><span class="bold">Weather:</span> ${data.weather[0].main}<img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png"></p>
+        <p><span class="bold">Description: ${data.weather[0].description}</p>
+        <p><span class="bold">Temperature: ${data.main.temp} &deg;</p>
+        <p><span class="bold">Pressure: ${data.main.pressure} hpa</p>
+        <p><span class="bold">Humidity: ${data.main.humidity} %</p>
+        <p><span class="bold">Wind Speed: ${data.wind.speed} m/s</p>
+        <p><span class="bold">Wind Direction: ${data.wind.deg} &deg;</p> 
+    </div>`;
+    $("#weatherInfo").html(results);
+}
 
 
 

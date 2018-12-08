@@ -132,7 +132,7 @@ body {
 #map {
       height: 100%;
       margin-right: 400px;
-    
+      margin-top: 5em;
       display: none;
 }
 /* #right-panel {
@@ -160,7 +160,7 @@ body {
 #right-panel {
   height: 100%;
   float: right;
-  width: 390px;
+  width: 24.375em;
   overflow: auto;
 }
 
@@ -185,5 +185,11 @@ display: none
   padding-left: 10px;
   display:none;
   
+}
+#weatherInfo{
+  width: 5em;
+  height:350px;
+
+
 }
 
