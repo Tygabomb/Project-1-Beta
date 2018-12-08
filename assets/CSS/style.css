@@ -9,7 +9,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
   
-<<<<<<< HEAD
 .TucsonImage {
   background-image: url("https://images.onepixel.com/4b52f26d-38cf-70fc-3540-31c172b49ef4_1000.jpg?auto=format&q=55&mark=watermark%2Fcenter-v5.png&markalign=center%2Cmiddle&h=364&markalpha=20&s=ce0f5096b407ea1190700b78cf25bfc0");
   background-color: #cccccc;
@@ -88,7 +87,6 @@ color: white;
 
 .links li{
     display: inline-block;
-=======
   .tucsonImage {
     background-image: url("https://images.onepixel.com/4b52f26d-38cf-70fc-3540-31c172b49ef4_1000.jpg?auto=format&q=55&mark=watermark%2Fcenter-v5.png&markalign=center%2Cmiddle&h=364&markalpha=20&s=ce0f5096b407ea1190700b78cf25bfc0");
     background-color: #cccccc;
@@ -203,7 +201,10 @@ color: white;
 
 .links li{
     display: inline-block;
+<<<<<<< HEAD
 >>>>>>> modified files
+=======
+>>>>>>> b19c5c741bac48f76d9b1759b0da66c91a363736
     padding-left: 20px;
 }
 
@@ -300,3 +301,6 @@ display: none
 background-color: aquamarine
 }
 
+.buttonContainer {
+  display: none;
+}
