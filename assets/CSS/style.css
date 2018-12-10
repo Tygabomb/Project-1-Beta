@@ -179,3 +179,22 @@ animation-timing-function: linear;
 background-color: aquamarine
 }
 
+/* weather div styling */
+#weatherInfo {
+    background-color: #007849; 
+    opacity: 0.8; 
+    width: 520px; 
+    height: 400px; 
+    border-radius: 40px; 
+    position: relative; 
+    background-image: url("https://images.onepixel.com/4b52f26d-38cf-70fc-3540-31c172b49ef4_1000.jpg?auto=format&q=55&mark=watermark%2Fcenter-v5.png&markalign=center%2Cmiddle&h=364&markalpha=20&s=ce0f5096b407ea1190700b78cf25bfc0");
+    background-repeat: no-repeat;
+    background-size: 520px 400px;
+    border: 3px solid darkgrey; 
+    color: #FFF;
+  }
+
+
+
+
+
