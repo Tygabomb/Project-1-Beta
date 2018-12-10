@@ -177,3 +177,4 @@ function weatherResult(data) {
     </div>`;
     $("#weatherInfo").html(results);
 }
+
