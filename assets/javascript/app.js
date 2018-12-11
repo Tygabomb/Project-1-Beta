@@ -153,6 +153,8 @@ function weatherData() {
             let wind = data.wind.speed;
 
         },
+
+        
         // if use submits a city thats not in the api it runs an error function
         error: function (xhr, ajaxOptions, thrownError) {
 
@@ -177,3 +179,11 @@ function weatherResult(data) {
     </div>`;
     $("#weatherInfo").html(results);
 }
+
+$("#hide").click(function(){
+    $("#weatherInfo").hide();
+});
+
+$("#show").click(function(){
+    $("#weatherInfo").show();
+});
