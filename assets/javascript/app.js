@@ -175,7 +175,7 @@ function weatherData() {
             console.log(data.wind.speed);
             let wind = data.wind.speed;
 
-        },
+        }
 
     });
 }
