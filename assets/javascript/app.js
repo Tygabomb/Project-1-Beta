@@ -1,5 +1,6 @@
 //https://cors-anywhere.herokuapp.com
-let map;
+// let map;
+const linkArray = [];
 function submit() {
     $("#form, #form-panel").submit(function (event) {
         event.preventDefault();
@@ -7,8 +8,14 @@ function submit() {
         const googleApiKey = 'AIzaSyDzgrHg1NotksoCzY-i-E98LuqKE-SH4Fg';
         let someOriginInput = $(event.currentTarget).find("#start").val().trim();
         someOriginInput = someOriginInput.replace(/\s+/g, '');
+        let origin = $(event.currentTarget).find("#start").val().trim();
+        let replacedOrigin = origin.split(' ').join('+');
+
         let someDestinationInput = $(event.currentTarget).find("#end").val().trim();
         someDestinationInput = someDestinationInput.replace(/\s+/g, '');
+
+        let destination = $(event.currentTarget).find("#end").val().trim();
+        let replacedDest = destination.split(' ').join('+');
         console.log(someDestinationInput);
 
         let queryURL = `https://maps.googleapis.com/maps/api/directions/json?origin=${someOriginInput}&destination=${someDestinationInput}&avoid=highways&mode=bicycling&key=${googleApiKey}`;
@@ -21,17 +28,26 @@ function submit() {
             contentType: 'application/json',
             type: 'GET',
             "success": function (data) {
-                console.log(data);
-                let startCoord = data.routes[0].legs[0].start_location;
-                console.log(startCoord);
-                let endCoord = data.routes[0].legs[0].end_location;
-                console.log(endCoord);
-                initMap(startCoord, endCoord);
-                showMap();
-                weatherData();
+                
+                if (data.status == 'OK') {
+                    console.log(data);
+                    let startCoord = data.routes[0].legs[0].start_location;
+                    console.log(startCoord);
+                    let endCoord = data.routes[0].legs[0].end_location;
+                    console.log(endCoord);
+          
+                   initMap(startCoord, endCoord);
+                              showMap();
+                              weatherData();
+          
+                              saveNewRoute(replacedOrigin, replacedDest);
+                          }
+                          else {
+                              $("#error").html("No existing bike route");
+                          }
 
 
-            }
+            },
         })
     });
 }
@@ -89,44 +105,44 @@ $('#new-route-button').on('click', function () {
 
 })
 
-dragElement(document.getElementById("form-panel"));
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    /* if present, the header is where you move the DIV from:*/
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    /* otherwise, move the DIV from anywhere inside the DIV:*/
-    elmnt.onmousedown = dragMouseDown;
-  }
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
-  function closeDragElement() {
-    /* stop moving when mouse button is released:*/
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
+// dragElement(document.getElementById("form-panel"));
+// function dragElement(elmnt) {
+//   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+//   if (document.getElementById(elmnt.id + "header")) {
+//     /* if present, the header is where you move the DIV from:*/
+//     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+//   } else {
+//     /* otherwise, move the DIV from anywhere inside the DIV:*/
+//     elmnt.onmousedown = dragMouseDown;
+//   }
+//   function dragMouseDown(e) {
+//     e = e || window.event;
+//     e.preventDefault();
+//     // get the mouse cursor position at startup:
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     document.onmouseup = closeDragElement;
+//     // call a function whenever the cursor moves:
+//     document.onmousemove = elementDrag;
+//   }
+//   function elementDrag(e) {
+//     e = e || window.event;
+//     e.preventDefault();
+//     // calculate the new cursor position:
+//     pos1 = pos3 - e.clientX;
+//     pos2 = pos4 - e.clientY;
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     // set the element's new position:
+//     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+//     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+//   }
+//   function closeDragElement() {
+//     /* stop moving when mouse button is released:*/
+//     document.onmouseup = null;
+//     document.onmousemove = null;
+//   }
+// }
 
 function weatherData() {
     let URL = "https://api.openweathermap.org/data/2.5/weather";
@@ -156,19 +172,14 @@ function weatherData() {
 
         
         // if use submits a city thats not in the api it runs an error function
-        error: function (xhr, ajaxOptions, thrownError) {
-
-            if (xhr.status == 404) {
-                errorResults(thrownError);
-            }
-        }
+        
     });
 }
 
 function weatherResult(data) {
     let results = `   
     <div class="results">
-        <h3>Weather Now for ${data.name},${data.sys.country}</h3>
+        <h3>Weather for ${data.name},${data.sys.country}</h3>
         <p><span class="bold">Weather:</span> ${data.weather[0].main}<img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png"></p>
         <p><span class="bold">Description: ${data.weather[0].description}</p>
         <p><span class="bold">Temperature: ${data.main.temp} &deg;</p>
@@ -187,3 +198,99 @@ $("#hide").click(function(){
 $("#show").click(function(){
     $("#weatherInfo").show();
 });
+
+function saveNewRoute(origin, destination) {
+    $('#new-route-button').on("click", function () {
+
+        console.log('`saveRoute` ran');
+        const mapLink = `https://www.googel.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=bicycling`;
+        console.log(mapLink);
+        addItemToDropDown(mapLink);
+        renderLinkList();
+    });
+}
+
+function addItemToDropDown(mapLink) {
+    console.log(`Adding "${mapLink}" to link list`);
+    linkArray.push({ name: mapLink, checked: false });
+}
+
+function renderLinkList() {
+    // render the shopping list in the DOM
+    console.log('`renderShoppingList` ran');
+    const shoppingListItemsString = generateLinkItemsString(linkArray);
+
+    // insert that HTML into the DOM
+    $('.dropdown-menu').html(shoppingListItemsString);
+}
+
+function generateLinkItemsString(linkArray) {
+    console.log("Generating link list element");
+
+    const items = linkArray.map((item, index) => generateItemElement(item, index));
+    console.log(items);
+    return items.join("");
+
+}
+function handleItemCheckClicked() {
+    $('.dropdown-menu').on('click', `.js-item-toggle`, event => {
+        console.log('`handleItemCheckClicked` ran');
+        const itemIndex = getItemIndexFromElement(event.currentTarget);
+        toggleCheckedForListItem(itemIndex);
+        renderLinkList();
+    });
+}
+
+function toggleCheckedForListItem(itemIndex) {
+    console.log("Toggling checked property for item at index " + itemIndex);
+    linkArray[itemIndex].checked = !linkArray[itemIndex].checked;
+}
+
+
+function generateItemElement(item, itemIndex, template) {
+    return `
+      <li class=" dropdown-item js-item-index-element" data-item-index="${itemIndex}">
+        <span class="shopping-item">${item.name}</span>
+        <div class="shopping-item-controls">
+          <button class="shopping-item-delete js-item-delete">
+              <span class="button-label">delete</span>
+          </button>
+        </div>
+      </li>`;
+}
+
+function getItemIndexFromElement(item) {
+    const itemIndexString = $(item)
+        .closest('.js-item-index-element')
+        .attr('data-item-index');
+    return parseInt(itemIndexString, 10);
+}
+
+function deleteItem(itemIndex) {
+    console.log("Adding checked property for item at index " + itemIndex);
+    STORE.splice(itemIndex, 1);
+
+
+}
+
+function handleDeleteItemClicked() {
+    // this function will be responsible for when users want to delete a shopping list
+    // item
+
+    $('.dropdown-menu').on('click', '.js-item-delete', event => {
+        console.log('`handleDeleteItemClicked` ran');
+        const itemIndex = getItemIndexFromElement(event.currentTarget);
+        deleteItem(itemIndex);
+        renderLinkList();
+
+    });
+}
+
+function handleShoppingList() {
+    renderLinkList();
+    // saveNewRoute();
+    handleItemCheckClicked();
+    handleDeleteItemClicked();
+}
+
+handleShoppingList();
