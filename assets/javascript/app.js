@@ -176,13 +176,6 @@ function weatherData() {
             let wind = data.wind.speed;
 
         },
-<<<<<<< HEAD
-
-        
-        // if use submits a city thats not in the api it runs an error function
-        error: function (xhr, ajaxOptions, thrownError) {
-=======
->>>>>>> work on traffic, user validation, and dropdown
 
     });
 }
@@ -202,7 +195,6 @@ function weatherResult(data) {
     $("#weatherInfo").html(results);
 }
 
-<<<<<<< HEAD
 $("#hide").click(function(){
     $("#weatherInfo").hide();
 });
@@ -210,7 +202,6 @@ $("#hide").click(function(){
 $("#show").click(function(){
     $("#weatherInfo").show();
 });
-=======
 function saveNewRoute(origin, destination) {
     $('#new-route-button').on("click", function () {
 
@@ -306,4 +297,3 @@ function handleShoppingList() {
 }
 
 handleShoppingList();
->>>>>>> work on traffic, user validation, and dropdown
