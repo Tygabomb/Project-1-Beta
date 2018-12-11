@@ -19,6 +19,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="#">
+
                 <img class="LogoGif" src="https://cdn.dribbble.com/users/767710/screenshots/2319262/deliveroo_dribbble_bike_city_icon_800x600.gif">
             </a>
             <a class="navbar-brand" href="#">Tucson Bike Yourself</a>
@@ -28,6 +29,13 @@
                 aria-expanded="false">
                 Dropdown link
             </a>
+<!-- 
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Dropdown link
+            </a> -->
+
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li class="dropdown-item" href="#">Action</li>
                 <li class="dropdown-item" href="#">Another action</li>
@@ -40,16 +48,14 @@
     <div class="tucsonImage">
         <div id="frontText">
             <h1 class="title" style="font-size:50px">Tucson Bike Yourself</h1>
-
             <form id="form">
                 <div class="form-group">
                     <label for="start">Start</label>
-                    <input type="start" class="start form-control" id="start" placeholder="Start">
-
                 </div>
                 <div class="form-group">
                     <label for="destination">Destination</label>
-                    <input type="destination" class="destination form-control" id="end" placeholder="Destination">
+                    <input type="destination" class="destination form-control" id="end" placeholder="Destination"
+                        required>
                 </div>
 
                 <button type="submit" class="frontButton btn btn-primary">Click To Ride</button>
@@ -58,18 +64,6 @@
         </div>
     </div>
 
-    <!-- <form id="form-panel">
-        <div class="form-group">
-            <label for="start">Start</label>
-            <input type="text" class="form-control" id="start" placeholder="start">
-        </div>
-        <div class="form-group">
-            <label for="destination">Destination</label>
-            <input type="text" class="form-control" id="end" placeholder="Destination">
-        </div> -->
-
-    <!-- <button type="submit" class="frontButton btn btn-primary">Click To Ride Again</button>
-    </form> -->
 
     <div class="buttonContainer">
         <button id="new-route-button" class="btn btn-primary">Click To Ride Again</button>
@@ -93,14 +87,18 @@
         <button type="submit" class="frontButton btn btn-primary">Click To Ride Again</button>
     </form>
     <div class="col-md-4"></div>
-    </div>
+<!--     </div>
 
+        <button id="new-route-button" class="btn btn-primary" >Click To Ride Again</button> 
+        <button type="submit" id="hide" class="btn btn-danger">Hide Weather</button>
+        <button type="submit" id="show" class="btn btn-warning">Show Weather</button>
+
+        <button id="save-route">Save Route</button>
+
+    </div>
+ -->
     <div id="right-panel"></div>
     <div class="map" id="map"></div>
-
-</body>
-
-</html>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -111,3 +109,6 @@
     async defer></script>
 <script type="text/javascript" src="./assets/javascript/app.js"></script>
 <!-- <script type="text/javascript" src="./assets/javascript/appWeather.js"></script> -->
+
+</html>
+

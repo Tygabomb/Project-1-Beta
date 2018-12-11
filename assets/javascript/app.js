@@ -1,4 +1,6 @@
+
 //https://cors-anywhere.herokuapp.com
+
 // let map;
 const linkArray = [];
 function submit() {
@@ -10,6 +12,7 @@ function submit() {
         someOriginInput = someOriginInput.replace(/\s+/g, '');
         let origin = $(event.currentTarget).find("#start").val().trim();
         let replacedOrigin = origin.split(' ').join('+');
+
 
         let someDestinationInput = $(event.currentTarget).find("#end").val().trim();
         someDestinationInput = someDestinationInput.replace(/\s+/g, '');
@@ -28,14 +31,15 @@ function submit() {
             contentType: 'application/json',
             type: 'GET',
             "success": function (data) {
-                
+
                 if (data.status == 'OK') {
                     console.log(data);
                     let startCoord = data.routes[0].legs[0].start_location;
                     console.log(startCoord);
                     let endCoord = data.routes[0].legs[0].end_location;
                     console.log(endCoord);
-          
+
+         
                    initMap(startCoord, endCoord);
                               showMap();
                               weatherData();
@@ -47,15 +51,17 @@ function submit() {
                           }
 
 
-            },
         })
     });
 }
 
 submit();
 
+
+
+
 function initMap(startCoord, endCoord) {
-    console.log("in init map");
+
     let directionsDisplay = new google.maps.DirectionsRenderer;
     let directionsService = new google.maps.DirectionsService;
     let start = new google.maps.LatLng(startCoord);
@@ -70,9 +76,11 @@ function initMap(startCoord, endCoord) {
     directionsDisplay.setPanel(document.getElementById('right-panel'));
     calcRoute(start, end, directionsService, directionsDisplay);
     map.setMapTypeId('hybrid');
-    var trafficLayer = new google.maps.TrafficLayer();
+    let street = google.maps.StreetViewPanorama;
+    let trafficLayer = new google.maps.TrafficLayer();
     trafficLayer.setMap(map);
-    var bikeLayer = new google.maps.BicyclingLayer();
+    // Dark green routes indicated dedicated bicycle routes. Light green routes indicate streets with dedicated “bike lanes.” Dashed routes indicate streets or paths otherwise recommended for bicycle usage.
+    let bikeLayer = new google.maps.BicyclingLayer();
     bikeLayer.setMap(map);
 }
 
@@ -80,7 +88,8 @@ function calcRoute(start, end, directionsService, directionsDisplay) {
     let request = {
         origin: start,
         destination: end,
-        travelMode: 'BICYCLING'
+        travelMode: 'BICYCLING',
+
     };
     directionsService.route(request, function (result, status) {
         if (status == 'OK') {
@@ -91,14 +100,15 @@ function calcRoute(start, end, directionsService, directionsDisplay) {
 }
 function showMap() {
     $(".result").show();
-
     $(".buttonContainer").show();
     $("#right-panel").css('display');
     $(".map").css('display', 'block');
     $(".tucsonImage").addClass('hide-bg');
     $(".tucsonImage").hide();
+    // newButton();
 }
 
+// function newButton() {
 $('#new-route-button').on('click', function () {
     $("#form-panel").show();
     $("#new-route-button").hide();
@@ -144,6 +154,7 @@ $('#new-route-button').on('click', function () {
 //   }
 // }
 
+
 function weatherData() {
     let URL = "https://api.openweathermap.org/data/2.5/weather";
     let key = "58c218efb9618338868686af4eb8ad1e";
@@ -173,6 +184,7 @@ function weatherData() {
         
         // if use submits a city thats not in the api it runs an error function
         
+
     });
 }
 
@@ -293,4 +305,6 @@ function handleShoppingList() {
     handleDeleteItemClicked();
 }
 
+
 handleShoppingList();
+
