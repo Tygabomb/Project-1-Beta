@@ -30,7 +30,6 @@ function submit() {
                 showMap();
                 weatherData();
 
-
             }
         })
     });
@@ -76,11 +75,12 @@ function calcRoute(start, end, directionsService, directionsDisplay) {
 function showMap() {
     $(".result").show();
 
-    $(".buttonContainer").show();
-    $("#right-panel").css('display');
-    $(".map").css('display', 'block');
-    $(".tucsonImage").addClass('hide-bg');
-    $(".tucsonImage").hide();
+    $('.buttonContainer').show();
+    $('#right-panel').css('display');
+    $('.map').css('display', 'block');
+    $('.tucsonImage').addClass('hide-bg');
+    $('.tucsonImage').hide();
+
 }
 
 $('#new-route-button').on('click', function () {
@@ -89,8 +89,9 @@ $('#new-route-button').on('click', function () {
 
 })
 
-dragElement(document.getElementById("form-panel"));
-function dragElement(elmnt) {
+$(function dragElement(elmnt) {
+    $(".drag-me").draggable()
+
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "header")) {
     /* if present, the header is where you move the DIV from:*/
@@ -125,8 +126,8 @@ function dragElement(elmnt) {
     /* stop moving when mouse button is released:*/
     document.onmouseup = null;
     document.onmousemove = null;
-  }
-}
+  };
+});
 
 function weatherData() {
     let URL = "https://api.openweathermap.org/data/2.5/weather";
