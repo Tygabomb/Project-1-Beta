@@ -129,7 +129,6 @@ $('#new-route-button').on('click', function () {
 })
 
 
-
 function weatherData() {
     let URL = "https://api.openweathermap.org/data/2.5/weather";
     let key = "58c218efb9618338868686af4eb8ad1e";
