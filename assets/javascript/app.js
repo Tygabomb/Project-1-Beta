@@ -1,4 +1,6 @@
+
 //https: cors - anywhere.herokuapp.com
+
 
 // let map;
 let currentOrigin;
@@ -22,6 +24,7 @@ function submit() {
         let someDestinationInput = $(event.currentTarget).find("#end").val().trim();
         someDestinationInput = someDestinationInput.replace(/\s+/g, '');
 
+
         currentOrigin = $(event.currentTarget).find("#start").val().trim();
         currentReplacedOrigin = currentOrigin.split(' ').join('+');
         console.log(currentReplacedOrigin);
@@ -33,6 +36,7 @@ function submit() {
         currentDestination = $(event.currentTarget).find("#end").val().trim();
         currentReplacedDest = currentDestination.split(' ').join('+');
         console.log(currentReplacedDest);
+
 
 
 
@@ -56,6 +60,7 @@ function submit() {
                     console.log(endCoord);
 
 
+
                     initMap(startCoord, endCoord);
                     showMap();
                     weatherData();
@@ -64,6 +69,19 @@ function submit() {
                     $("#error").html("No existing bike route");
                 }
             },
+
+         
+                   initMap(startCoord, endCoord);
+                              showMap();
+                              weatherData();
+          
+                              saveNewRoute(replacedOrigin, replacedDest);
+                          }
+                          else {
+                              $("#error").html("No existing bike route");
+                          }
+
+
         })
 
     });
@@ -129,6 +147,45 @@ $('#new-route-button').on('click', function () {
 
 })
 
+// dragElement(document.getElementById("form-panel"));
+// function dragElement(elmnt) {
+//   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+//   if (document.getElementById(elmnt.id + "header")) {
+//     /* if present, the header is where you move the DIV from:*/
+//     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+//   } else {
+//     /* otherwise, move the DIV from anywhere inside the DIV:*/
+//     elmnt.onmousedown = dragMouseDown;
+//   }
+//   function dragMouseDown(e) {
+//     e = e || window.event;
+//     e.preventDefault();
+//     // get the mouse cursor position at startup:
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     document.onmouseup = closeDragElement;
+//     // call a function whenever the cursor moves:
+//     document.onmousemove = elementDrag;
+//   }
+//   function elementDrag(e) {
+//     e = e || window.event;
+//     e.preventDefault();
+//     // calculate the new cursor position:
+//     pos1 = pos3 - e.clientX;
+//     pos2 = pos4 - e.clientY;
+//     pos3 = e.clientX;
+//     pos4 = e.clientY;
+//     // set the element's new position:
+//     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+//     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+//   }
+//   function closeDragElement() {
+//     /* stop moving when mouse button is released:*/
+//     document.onmouseup = null;
+//     document.onmousemove = null;
+//   }
+// }
+
 
 
 function weatherData() {
@@ -170,6 +227,7 @@ function reset() {
 function weatherResult(data) {
     let results = `  
     <div class="results">
+
     <h3>Weather for ${data.name},${data.sys.country}</h3>
     <p><span class="strong">Weather:</span> ${data.weather[0].main}<img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" id="icon"></p>
     <p><span class="strong">Description: ${data.weather[0].description}</p>
@@ -178,17 +236,21 @@ function weatherResult(data) {
     <p><span class="strong">Humidity: ${data.main.humidity} %</p>
     <p><span class="strong">Wind Speed: ${data.wind.speed} m/s</p>
     <p><span class="strong">Wind Direction: ${data.wind.deg} &deg;</p> 
+
     </div>`;
     $("#weatherInfo").html(results);
 }
 
+
 $("#hide").click(function () {
+
     $("#weatherInfo").hide();
 });
 
 $("#show").click(function () {
     $("#weatherInfo").show();
 });
+
 
 function displaySearch() {
     // $(".result").hide();
@@ -200,6 +262,17 @@ function displaySearch() {
     $("#save-route").hide();
     $("body").removeClass(".secondpage");
     $("body").addClass(".landpage");
+
+function saveNewRoute(origin, destination) {
+    $('#new-route-button').on("click", function () {
+
+        console.log('`saveRoute` ran');
+        const mapLink = `https://www.googel.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=bicycling`;
+        console.log(mapLink);
+        addItemToDropDown(mapLink);
+        renderLinkList();
+    });
+
 }
 function showMap() {
     // $(".result").show();
@@ -315,4 +388,10 @@ function handleShoppingList() {
     handleDeleteItemClicked();
 }
 
+
 handleShoppingList();
+
+
+handleShoppingList();
+
+
