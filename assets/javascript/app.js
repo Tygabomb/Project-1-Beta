@@ -1,6 +1,12 @@
-// https://cors-anywhere.herokuapp.com
+//https: cors - anywhere.herokuapp.com
+
 // let map;
+let currentOrigin;
+let currentReplacedOrigin;
+let currentDestination;
+let currentReplacedDest
 const linkArray = [];
+
 function submit() {
     $("#form, #form-panel").submit(function (event) {
         event.preventDefault();
@@ -8,14 +14,27 @@ function submit() {
         const googleApiKey = 'AIzaSyDzgrHg1NotksoCzY-i-E98LuqKE-SH4Fg';
         let someOriginInput = $(event.currentTarget).find("#start").val().trim();
         someOriginInput = someOriginInput.replace(/\s+/g, '');
+
         let origin = $(event.currentTarget).find("#start").val().trim();
         let replacedOrigin = origin.split(' ').join('+');
-        console.log(replacedOrigin);
+
+
         let someDestinationInput = $(event.currentTarget).find("#end").val().trim();
         someDestinationInput = someDestinationInput.replace(/\s+/g, '');
+
+        currentOrigin = $(event.currentTarget).find("#start").val().trim();
+        currentReplacedOrigin = currentOrigin.split(' ').join('+');
+        console.log(currentReplacedOrigin);
+
         let destination = $(event.currentTarget).find("#end").val().trim();
         let replacedDest = destination.split(' ').join('+');
-        console.log(replacedDest);
+        console.log(someDestinationInput);
+
+        currentDestination = $(event.currentTarget).find("#end").val().trim();
+        currentReplacedDest = currentDestination.split(' ').join('+');
+        console.log(currentReplacedDest);
+
+
 
 
         let queryURL = `https://maps.googleapis.com/maps/api/directions/json?origin=${someOriginInput}&destination=${someDestinationInput}&avoid=highways&mode=bicycling&key=${googleApiKey}`;
@@ -28,6 +47,7 @@ function submit() {
             contentType: 'application/json',
             type: 'GET',
             "success": function (data) {
+
                 if (data.status == 'OK') {
                     console.log(data);
                     let startCoord = data.routes[0].legs[0].start_location;
@@ -35,27 +55,22 @@ function submit() {
                     let endCoord = data.routes[0].legs[0].end_location;
                     console.log(endCoord);
 
+
                     initMap(startCoord, endCoord);
                     showMap();
                     weatherData();
-
-                    saveNewRoute(replacedOrigin, replacedDest);
                 }
                 else {
                     $("#error").html("No existing bike route");
                 }
-
-
             },
-
         })
+
     });
+
 }
 
 submit();
-
-
-
 
 function initMap(startCoord, endCoord) {
 
@@ -93,8 +108,10 @@ function calcRoute(start, end, directionsService, directionsDisplay) {
             directionsDisplay.setDirections(result);
         }
     });
+    $("#right-panel").empty();
 
 }
+
 function showMap() {
     $(".result").show();
     $(".buttonContainer").show();
@@ -111,45 +128,8 @@ $('#new-route-button').on('click', function () {
     $("#new-route-button").hide();
 
 })
-// }
-dragElement(document.getElementById("form-panel"));
-function dragElement(elmnt) {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    if (document.getElementById(elmnt.id + "header")) {
-        /* if present, the header is where you move the DIV from:*/
-        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-    } else {
-        /* otherwise, move the DIV from anywhere inside the DIV:*/
-        elmnt.onmousedown = dragMouseDown;
-    }
-    function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // get the mouse cursor position at startup:
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
-        // call a function whenever the cursor moves:
-        document.onmousemove = elementDrag;
-    }
-    function elementDrag(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // calculate the new cursor position:
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        // set the element's new position:
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    }
-    function closeDragElement() {
-        /* stop moving when mouse button is released:*/
-        document.onmouseup = null;
-        document.onmousemove = null;
-    }
-}
+
+
 
 function weatherData() {
     let URL = "https://api.openweathermap.org/data/2.5/weather";
@@ -176,51 +156,81 @@ function weatherData() {
             let wind = data.wind.speed;
 
         },
-<<<<<<< HEAD
 
-        
+
         // if use submits a city thats not in the api it runs an error function
-        error: function (xhr, ajaxOptions, thrownError) {
-=======
->>>>>>> work on traffic, user validation, and dropdown
+
 
     });
 }
-
+function reset() {
+    $("#start").val().trim("");
+    $("#end").val().trim("");
+}
 function weatherResult(data) {
-    let results = `   
+    let results = `  
     <div class="results">
-        <h3>Weather Now for ${data.name},${data.sys.country}</h3>
-        <p><span class="bold">Weather:</span> ${data.weather[0].main}<img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png"></p>
-        <p><span class="bold">Description: ${data.weather[0].description}</p>
-        <p><span class="bold">Temperature: ${data.main.temp} &deg;</p>
-        <p><span class="bold">Pressure: ${data.main.pressure} hpa</p>
-        <p><span class="bold">Humidity: ${data.main.humidity} %</p>
-        <p><span class="bold">Wind Speed: ${data.wind.speed} m/s</p>
-        <p><span class="bold">Wind Direction: ${data.wind.deg} &deg;</p> 
+    <h3>Weather for ${data.name},${data.sys.country}</h3>
+    <p><span class="strong">Weather:</span> ${data.weather[0].main}<img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" id="icon"></p>
+    <p><span class="strong">Description: ${data.weather[0].description}</p>
+    <p><span class="strong">Temperature: ${data.main.temp} &deg;</p>
+    <p><span class="strong">Pressure: ${data.main.pressure} hpa</p>
+    <p><span class="strong">Humidity: ${data.main.humidity} %</p>
+    <p><span class="strong">Wind Speed: ${data.wind.speed} m/s</p>
+    <p><span class="strong">Wind Direction: ${data.wind.deg} &deg;</p> 
     </div>`;
     $("#weatherInfo").html(results);
 }
 
-<<<<<<< HEAD
-$("#hide").click(function(){
+$("#hide").click(function () {
     $("#weatherInfo").hide();
 });
 
-$("#show").click(function(){
+$("#show").click(function () {
     $("#weatherInfo").show();
 });
-=======
-function saveNewRoute(origin, destination) {
-    $('#new-route-button').on("click", function () {
 
-        console.log('`saveRoute` ran');
-        const mapLink = `https://www.googel.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=bicycling`;
-        console.log(mapLink);
-        addItemToDropDown(mapLink);
-        renderLinkList();
-    });
+function displaySearch() {
+    // $(".result").hide();
+    $(".buttonContainer").hide();
+    $("#weatherInfo").hide();
+    $("#new-route-button").hide();
+    $('#hide').hide();
+    $('#show').hide();
+    $("#save-route").hide();
+    $("body").removeClass(".secondpage");
+    $("body").addClass(".landpage");
 }
+function showMap() {
+    // $(".result").show();
+    $('.LogoGif').hide();
+    $('.logo').show();
+    $('.dropdown').show();
+    $(".buttonContainer").show();
+    $("#weatherInfo").show();
+    $("#new-route-button").show();
+    $('#hide').show();
+    $('#show').show();
+    $("#save-route").show();
+    $("#right-panel").css('display');
+    $(".map").css('display', 'block');
+    // $(".tucsonImage").addClass('hide-bg');
+    $(".secondpage").show();
+    $("body").removeClass(".landpage");
+    $("body").addClass(".seconpage")
+    $(".tucsonImage").hide();
+    // newButton();
+}
+
+$(document).on("click", '#save-route', function (event) {
+
+    console.log('`saveRoute` ran');
+    const mapLink = `https://www.google.com/maps/dir/?api=1&origin=${currentReplacedOrigin}&destination=${currentReplacedDest}&travelmode=bicycling`;
+    console.log(mapLink);
+    addItemToDropDown(mapLink);
+    renderLinkList();
+});
+//}
 
 function addItemToDropDown(mapLink) {
     console.log(`Adding "${mapLink}" to link list`);
@@ -261,14 +271,14 @@ function toggleCheckedForListItem(itemIndex) {
 
 function generateItemElement(item, itemIndex, template) {
     return `
-      <li class=" dropdown-item js-item-index-element" data-item-index="${itemIndex}">
-        <span class="shopping-item">${item.name}</span>
-        <div class="shopping-item-controls">
-          <button class="shopping-item-delete js-item-delete">
-              <span class="button-label">delete</span>
-          </button>
-        </div>
-      </li>`;
+   <li class=" dropdown-item js-item-index-element" data-item-index="${itemIndex}">
+    <a class="link-item" href= "${item.name}"}>${item.name}</a>
+    <div class="link-item-controls">
+     <button class="link-item-delete js-item-delete">
+       <span class="button-label">delete</span>
+     </button>
+    </div>
+   </li>`;
 }
 
 function getItemIndexFromElement(item) {
@@ -280,13 +290,13 @@ function getItemIndexFromElement(item) {
 
 function deleteItem(itemIndex) {
     console.log("Adding checked property for item at index " + itemIndex);
-    STORE.splice(itemIndex, 1);
+    linkArray.splice(itemIndex, 1);
 
 
 }
 
 function handleDeleteItemClicked() {
-    // this function will be responsible for when users want to delete a shopping list
+    // this function will be responsible for when users want to delete a link list
     // item
 
     $('.dropdown-menu').on('click', '.js-item-delete', event => {
@@ -306,4 +316,3 @@ function handleShoppingList() {
 }
 
 handleShoppingList();
->>>>>>> work on traffic, user validation, and dropdown

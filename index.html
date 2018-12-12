@@ -9,128 +9,88 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
     <link rel="stylesheet" href="./assets/CSS/style.css">
-
-
-
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm navbar-theme">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img class=LogoGif src="https://cdn.dribbble.com/users/767710/screenshots/2319262/deliveroo_dribbble_bike_city_icon_800x600.gif">
-            </a>
-            <a class="navbar-brand" href="#">Tucson Bike Yourself</a>
-        </div>
-<<<<<<< HEAD
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Saved Rides
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li><a href="#">HTML</a></li>
-                <li><a href="#">CSS</a></li>
-                <li><a href="#">JavaScript</a></li>
-            </ul>
-            </div>   
-=======
-        <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Dropdown link
-            </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li class="dropdown-item" href="#">Action</li>
-                <li class="dropdown-item" href="#">Another action</li>
-                <li class="dropdown-item" href="#">Something else here</li>
+            <a class="navbar-brand" href="#">
+                <img class="LogoGif" src="https://cdn.dribbble.com/users/767710/screenshots/2319262/deliveroo_dribbble_bike_city_icon_800x600.gif">
+            </a>
+            <a class="navbar-brand logo">Tucson Bike Yourself</a>
+        </div>
+    </nav>
+    <section class="landPage">
+        <div class="tucsonImage">
+            <div id="frontText">
+                <h1 class="title" style="font-size:50px">Tucson Bike Yourself</h1>
+
+                <form id="form">
+                    <div class="form-group">
+                        <label for="start" id="begin">Start</label>
+                        <input type="start" class="start form-control" id="start" placeholder="Start" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="destination" id="dest">Destination</label>
+                        <input type="destination" class="destination form-control" id="end" placeholder="Destination"
+                            required>
+                    </div>
+                    <button type="submit" class="frontButton btn btn-primary">Click To Ride</button>
+                </form>
+                <div id="error"></div>
             </div>
         </div>
->>>>>>> work on traffic, user validation, and dropdown
-    </nav>
-
-
-    <div class="tucsonImage">
-        <div id="frontText">
-            <h1 class="title" style="font-size:50px">Tucson Bike Yourself</h1>
-            <form id="form">
+    </section>
+    <section class="secondpage">
+        <div class="buttonContainer">
+            <button type="submit" id="hide" class="btn btn-danger">Hide Weather</button>
+            <button type="submit" id="show" class="btn btn-warning">Show Weather</button>
+            <button id="save-route" class="btn">Save Route</button>
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Saved Route links
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"></div>
+            </div>
+        </div>
+        <div class="row weatherFormDiv">
+            <div class="col-md-6">
+                <div id="weatherInfo"></div>
+            </div>
+            <div class="col-md-1"></div>
+            <form class="col-md-4" id="form-panel">
+                <legend> Bike Again</legend>
                 <div class="form-group">
-                    <label for="start">Start</label>
-<<<<<<< HEAD
-                    <input type="start" class="start form-control" id="start" placeholder="Start">
-                        
-=======
-                    <input type="start" class="start form-control" id="start" aria-describedby="startDestination"
-                        placeholder="start" required>
->>>>>>> work on traffic, user validation, and dropdown
+                    <!-- <label for="start" id="begin1">Start</label> -->
+                    <input type="text" class="form-control form-input" id="start" placeholder="start">
                 </div>
                 <div class="form-group">
-                    <label for="destination">Destination</label>
-                    <input type="destination" class="destination form-control" id="end" placeholder="Destination"
-                        required>
+                    <!-- <label for="destination" id="dest1">Destination</label> -->
+                    <input type="text" class="form-control form-input" id="end" placeholder="Destination">
                 </div>
 
-                <button type="submit" class="frontButton btn btn-primary">Click To Ride</button>
+                <button type="submit" class="secondButton btn btn-primary">Click To Ride Again</button>
             </form>
-            <!-- <button class="FrontButton hvr-buzz-out" id="submit" style="width:100px;height:60px;">Click to
-                    Ride</button> -->
-            <div id="error">error!</div>
-        </div>
-    </div>
-
-    <form id="form-panel">
-        <div class="form-group">
-            <label for="start">Start</label>
-            <input type="text" class="form-control" id="start" placeholder="start">
-        </div>
-        <div class="form-group">
-            <label for="destination">Destination</label>
-            <input type="text" class="form-control" id="end" placeholder="Destination">
+            <div class="col-md-4"></div>
         </div>
 
-        <button type="submit" class="frontButton btn btn-primary">Click To Ride Again</button>
-    </form>
-    <div class="buttonContainer">
-<<<<<<< HEAD
-        <button id="new-route-button" class="btn btn-primary" >Click To Ride Again</button> 
-        <button type="submit" id="hide" class="btn btn-danger">Hide Weather</button>
-        <button type="submit" id="show" class="btn btn-warning">Show Weather</button>
-=======
-        <button id="new-route-button">Click To Ride Again</button>
-        <button id="save-route">Save Route</button>
->>>>>>> work on traffic, user validation, and dropdown
-    </div>
-    <div id="weatherInfo"></div>
+        <div id="right-panel"> </div>
+        <div id="map"></div>
 
-    <div id="right-panel"></div>
-    <div class="map" id="map"></div>
-
-
+    </section>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" noncanonical-src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4= sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA=="
-        crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzgrHg1NotksoCzY-i-E98LuqKE-SH4Fg&libraries=places&callback=initMap"
         async defer></script>
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <script type="text/javascript" src="./assets/javascript/app.js"></script>
 </body>
 
-<<<<<<< HEAD
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzgrHg1NotksoCzY-i-E98LuqKE-SH4Fg&libraries=places&callback=initMap"
-async defer></script>
-<script type="text/javascript" src="./assets/javascript/app.js"></script>
-<!-- <script type="text/javascript" src="./assets/javascript/appWeather.js"></script> -->
-=======
 </html>
->>>>>>> work on traffic, user validation, and dropdown
