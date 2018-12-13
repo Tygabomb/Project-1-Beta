@@ -1,4 +1,6 @@
+
 //https: cors - anywhere.herokuapp.com
+
 
 // let map;
 let currentOrigin;
@@ -6,6 +8,7 @@ let currentReplacedOrigin;
 let currentDestination;
 let currentReplacedDest
 const linkArray = [];
+
 function submit() {
     $("#form, #form-panel").submit(function (event) {
         event.preventDefault();
@@ -13,12 +16,14 @@ function submit() {
         const googleApiKey = 'AIzaSyDzgrHg1NotksoCzY-i-E98LuqKE-SH4Fg';
         let someOriginInput = $(event.currentTarget).find("#start").val().trim();
         someOriginInput = someOriginInput.replace(/\s+/g, '');
+
         let origin = $(event.currentTarget).find("#start").val().trim();
         let replacedOrigin = origin.split(' ').join('+');
 
 
         let someDestinationInput = $(event.currentTarget).find("#end").val().trim();
         someDestinationInput = someDestinationInput.replace(/\s+/g, '');
+
 
         currentOrigin = $(event.currentTarget).find("#start").val().trim();
         currentReplacedOrigin = currentOrigin.split(' ').join('+');
@@ -51,7 +56,6 @@ function submit() {
                     let endCoord = data.routes[0].legs[0].end_location;
                     console.log(endCoord);
 
-
                     initMap(startCoord, endCoord);
                     showMap();
                     weatherData();
@@ -60,6 +64,19 @@ function submit() {
                     $("#error").html("No existing bike route");
                 }
             },
+
+         
+                   initMap(startCoord, endCoord);
+                              showMap();
+                              weatherData();
+          
+                              saveNewRoute(replacedOrigin, replacedDest);
+                          }
+                          else {
+                              $("#error").html("No existing bike route");
+                          }
+
+
         })
 
     });
@@ -161,23 +178,31 @@ function weatherData() {
 
     });
 }
-
+function reset() {
+    $("#start").val().trim("");
+    $("#end").val().trim("");
+}
 function weatherResult(data) {
-    let results = `   
-        <div class="results">
-        <h3>Weather for ${data.name},${data.sys.country}</h3>
-        <p><span class="strong">Weather:</span> ${data.weather[0].main}<img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" id="icon"></p>
-        <p><span class="strong">Description: ${data.weather[0].description}</p>
-        <p><span class="strong">Temperature: ${data.main.temp} &deg;</p>
-        <p><span class="strong">Pressure: ${data.main.pressure} hpa</p>
-        <p><span class="strong">Humidity: ${data.main.humidity} %</p>
-        <p><span class="strong">Wind Speed: ${data.wind.speed} m/s</p>
-        <p><span class="strong">Wind Direction: ${data.wind.deg} &deg;</p> 
-        </div>`;
+
+    let results = `  
+    <div class="results">
+
+    <h3>Weather for ${data.name},${data.sys.country}</h3>
+    <p><span class="strong">Weather:</span> ${data.weather[0].main}<img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" id="icon"></p>
+    <p><span class="strong">Description: ${data.weather[0].description}</p>
+    <p><span class="strong">Temperature: ${data.main.temp} &deg;</p>
+    <p><span class="strong">Pressure: ${data.main.pressure} hpa</p>
+    <p><span class="strong">Humidity: ${data.main.humidity} %</p>
+    <p><span class="strong">Wind Speed: ${data.wind.speed} m/s</p>
+    <p><span class="strong">Wind Direction: ${data.wind.deg} &deg;</p> 
+
+    </div>`;
     $("#weatherInfo").html(results);
 }
 
+
 $("#hide").click(function () {
+
     $("#weatherInfo").hide();
 });
 
@@ -195,9 +220,23 @@ function displaySearch() {
     $("#save-route").hide();
     $("body").removeClass(".secondpage");
     $("body").addClass(".landpage");
+
+function saveNewRoute(origin, destination) {
+    $('#new-route-button').on("click", function () {
+
+        console.log('`saveRoute` ran');
+        const mapLink = `https://www.googel.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=bicycling`;
+        console.log(mapLink);
+        addItemToDropDown(mapLink);
+        renderLinkList();
+    });
+
 }
 function showMap() {
     // $(".result").show();
+    $('.LogoGif').hide();
+    $('.logo').show();
+    $('.dropdown').show();
     $(".buttonContainer").show();
     $("#weatherInfo").show();
     $("#new-route-button").show();
@@ -217,7 +256,9 @@ function showMap() {
 $(document).on("click", '#save-route', function (event) {
 
     console.log('`saveRoute` ran');
+
     const mapLink = `https://www.googel.com/maps/dir/?api=1&origin=${currentReplacedOrigin}&destination=${currentReplacedDest}&travelmode=bicycling`;
+
     console.log(mapLink);
     addItemToDropDown(mapLink);
     renderLinkList();
@@ -241,6 +282,7 @@ function renderLinkList() {
 function generateLinkItemsString(linkArray) {
     console.log("Generating link list element");
     debugger;
+
     const items = linkArray.map((item, index) => generateItemElement(item, index));
     console.log(items);
     return items.join("");
@@ -263,6 +305,7 @@ function toggleCheckedForListItem(itemIndex) {
 
 function generateItemElement(item, itemIndex, template) {
     return `
+
       <li class=" dropdown-item js-item-index-element" data-item-index="${itemIndex}">
         <span class="shopping-item">${item.name}</span>
         <div class="shopping-item-controls">
@@ -288,7 +331,9 @@ function deleteItem(itemIndex) {
 }
 
 function handleDeleteItemClicked() {
+
     // this function will be responsible for when users want to delete a shopping list
+
     // item
 
     $('.dropdown-menu').on('click', '.js-item-delete', event => {
@@ -308,3 +353,4 @@ function handleShoppingList() {
 }
 
 handleShoppingList();
+

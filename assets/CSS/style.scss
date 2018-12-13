@@ -1,0 +1,118 @@
+// font-family: 'Nanum Gothic', sans-serif;
+$font-stack: Nanum Gothic, sans-serif;
+body {
+  font: 100% $font-stack;
+  
+}
+%label-font {
+    font-size: 25px;
+    color:white;
+  }
+  #begin {
+    @extend %label-font;
+  }
+  
+  #dest{
+    @extend %label-font;
+    
+  }
+  #error{
+      @extend %label-font;
+  }
+  %error-font {
+    margin-top: 50px;  
+    font-size: 25px;
+    color:black;
+    background-color: #ffe680;
+  }
+  #error{
+      @extend %error-font;
+  }
+  %button-style{
+    background-color: maroon;
+    font-size: 20px;
+    border: none;
+    color: antiquewhite;
+    padding: 5px 30px 38px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 35px;
+  }
+  .frontButton {
+      @extend %button-style;
+  }
+  %secondpage-style{
+      background-color: #ffe6b3
+  }
+  .secondpage{
+      @extend %secondpage-style;
+  }
+  %form-panel-style{
+      background-color: white;
+  }
+  #form-panel{
+      @extend %form-panel-style;
+  }
+  #right-panel{
+      @extend %form-panel-style;
+  }
+  %secondButton-style{
+    border-radius: 16px;
+    background-color: indianred
+  }
+  .secondButton{
+      @extend %secondButton-style;
+  }
+// $font-stack: "Ubuntu", sans-serif;
+$primarycolor: #EF8B4B;
+$secondarycolor: #0F1D37;;
+@mixin btn-theme {
+    background-color: $primarycolor;
+    border-color: #613a51;
+    border-radius: 5px;
+    text: {
+        transform: bold;
+        decoration: italic;
+        shadow: 0 .063em rgba(0,0,0,.3);
+    }
+    &:hover {
+       background-color: #8A58B7;
+       box-shadow: 0 .125em rgba(255,255,255,.4), inset 0 .063em   rgba(255,255,255,.4), inset 0 -0.188em #804FAD;
+    }
+    &:active {
+       box-shadow: inset 0 0 1.094em #472566, inset 0 .063em #390668, inset 0 -0.188em #682CA0, 0 .063em rgba(255,255,255,.4);  
+    }
+    
+};
+@mixin nav-theme {
+    background-color: $secondarycolor;
+    text: {
+      transform: bold;
+      text-decoration: italic;
+    }
+    
+}
+@mixin weather-theme {
+  background-color: white;
+  border-block-start: #613a51;
+  border-block-end-color: #EF8B4B;
+  
+}
+.btn {
+    @include btn-theme;
+};
+.navbar-theme {
+    @include nav-theme;
+}
+.wthr-theme {
+  @include weather-theme;
+    
+}
+
+
+
+
+
