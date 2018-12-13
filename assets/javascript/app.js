@@ -38,9 +38,6 @@ function submit() {
         console.log(currentReplacedDest);
 
 
-
-
-
         let queryURL = `https://maps.googleapis.com/maps/api/directions/json?origin=${someOriginInput}&destination=${someDestinationInput}&avoid=highways&mode=bicycling&key=${googleApiKey}`;
         console.log(queryURL);
 
@@ -58,8 +55,6 @@ function submit() {
                     console.log(startCoord);
                     let endCoord = data.routes[0].legs[0].end_location;
                     console.log(endCoord);
-
-
 
                     initMap(startCoord, endCoord);
                     showMap();
@@ -89,6 +84,9 @@ function submit() {
 }
 
 submit();
+
+
+
 
 function initMap(startCoord, endCoord) {
 
@@ -147,46 +145,6 @@ $('#new-route-button').on('click', function () {
 
 })
 
-// dragElement(document.getElementById("form-panel"));
-// function dragElement(elmnt) {
-//   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-//   if (document.getElementById(elmnt.id + "header")) {
-//     /* if present, the header is where you move the DIV from:*/
-//     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-//   } else {
-//     /* otherwise, move the DIV from anywhere inside the DIV:*/
-//     elmnt.onmousedown = dragMouseDown;
-//   }
-//   function dragMouseDown(e) {
-//     e = e || window.event;
-//     e.preventDefault();
-//     // get the mouse cursor position at startup:
-//     pos3 = e.clientX;
-//     pos4 = e.clientY;
-//     document.onmouseup = closeDragElement;
-//     // call a function whenever the cursor moves:
-//     document.onmousemove = elementDrag;
-//   }
-//   function elementDrag(e) {
-//     e = e || window.event;
-//     e.preventDefault();
-//     // calculate the new cursor position:
-//     pos1 = pos3 - e.clientX;
-//     pos2 = pos4 - e.clientY;
-//     pos3 = e.clientX;
-//     pos4 = e.clientY;
-//     // set the element's new position:
-//     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-//     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-//   }
-//   function closeDragElement() {
-//     /* stop moving when mouse button is released:*/
-//     document.onmouseup = null;
-//     document.onmousemove = null;
-//   }
-// }
-
-
 
 function weatherData() {
     let URL = "https://api.openweathermap.org/data/2.5/weather";
@@ -225,6 +183,7 @@ function reset() {
     $("#end").val().trim("");
 }
 function weatherResult(data) {
+
     let results = `  
     <div class="results">
 
@@ -250,7 +209,6 @@ $("#hide").click(function () {
 $("#show").click(function () {
     $("#weatherInfo").show();
 });
-
 
 function displaySearch() {
     // $(".result").hide();
@@ -298,7 +256,9 @@ function showMap() {
 $(document).on("click", '#save-route', function (event) {
 
     console.log('`saveRoute` ran');
-    const mapLink = `https://www.google.com/maps/dir/?api=1&origin=${currentReplacedOrigin}&destination=${currentReplacedDest}&travelmode=bicycling`;
+
+    const mapLink = `https://www.googel.com/maps/dir/?api=1&origin=${currentReplacedOrigin}&destination=${currentReplacedDest}&travelmode=bicycling`;
+
     console.log(mapLink);
     addItemToDropDown(mapLink);
     renderLinkList();
@@ -321,6 +281,7 @@ function renderLinkList() {
 
 function generateLinkItemsString(linkArray) {
     console.log("Generating link list element");
+    debugger;
 
     const items = linkArray.map((item, index) => generateItemElement(item, index));
     console.log(items);
@@ -344,14 +305,15 @@ function toggleCheckedForListItem(itemIndex) {
 
 function generateItemElement(item, itemIndex, template) {
     return `
-   <li class=" dropdown-item js-item-index-element" data-item-index="${itemIndex}">
-    <a class="link-item" href= "${item.name}"}>${item.name}</a>
-    <div class="link-item-controls">
-     <button class="link-item-delete js-item-delete">
-       <span class="button-label">delete</span>
-     </button>
-    </div>
-   </li>`;
+
+      <li class=" dropdown-item js-item-index-element" data-item-index="${itemIndex}">
+        <span class="shopping-item">${item.name}</span>
+        <div class="shopping-item-controls">
+          <button class="shopping-item-delete js-item-delete">
+              <span class="button-label">delete</span>
+          </button>
+        </div>
+      </li>`;
 }
 
 function getItemIndexFromElement(item) {
@@ -369,7 +331,9 @@ function deleteItem(itemIndex) {
 }
 
 function handleDeleteItemClicked() {
-    // this function will be responsible for when users want to delete a link list
+
+    // this function will be responsible for when users want to delete a shopping list
+
     // item
 
     $('.dropdown-menu').on('click', '.js-item-delete', event => {
@@ -388,10 +352,5 @@ function handleShoppingList() {
     handleDeleteItemClicked();
 }
 
-
 handleShoppingList();
-
-
-handleShoppingList();
-
 
